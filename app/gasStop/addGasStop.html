@@ -1,33 +1,35 @@
 <div class="container-fluid scrollable" style="background-color: white;">
-    <div class="row">
-        <div class="col-sm-12">
-            <span class="error">{{ error }}</span>
-        </div>
+    <div ui-content-for="title">
+        <span>Add Gas Stop</span>
     </div>
-    <form >
-        <div class="row" style="border-bottom: 1px solid #008000;">
-            <span class="col-sm-12" style="font-weight: bold; font-size: large;">Add a Gas Stop</span>
-        </div>
-        <div class="form-group">
-            <label>Select a Vehicle: </label>
-            <select class="form-control" ng-model="gasStop.vehicle" ng-options="item.vid as item.model for item in vehicles"></select>
-        </div>
-        <div class="form-group">
-            <label>Odometer: </label>
-            <input class="form-control" type="text" ng-model="gasStop.odometer" placeholder="55000"/>
-        </div>
-        <div class="form-group">
-            <label>Gallons: </label>
-            <input class="form-control" type="text" ng-model="gasStop.gallonsPurchased" placeholder="12.250" />
-        </div>
-        <div class="form-group">
-            <label>Price: </label>
-            <input class="form-control" type="text" ng-model="gasStop.pricePaid" placeholder="$25.00"/></span>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary form-control" value="Add Gas Stop" ng-click="submit()"/>
-        </div>
 
-    </form>
+    <div class="scrollable-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="error">{{ error }}</span>
+            </div>
+        </div>
+        <form >
+            <div class="form-group">
+                <label>Select a Vehicle: </label>
+                <select class="form-control" ng-model="gasStop.vehicle" ng-options="item.vid as item.model for item in vehicles"></select>
+            </div>
+            <div class="form-group">
+                <label>Odometer: </label>
+                <input class="form-control" type="text" ng-model="gasStop.odometer" placeholder="55000"/>
+            </div>
+            <div class="form-group">
+                <label>Gallons: </label>
+                <input class="form-control" type="text" ng-model="gasStop.gallonsPurchased" placeholder="12.250" />
+            </div>
+            <div class="form-group">
+                <label>Price: </label>
+                <input class="form-control" type="text" ng-model="gasStop.pricePaid" placeholder="$25.00"/></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary form-control" value="Add Gas Stop" ng-click="submit()"/>
+            </div>
 
+        </form>
+    </div>
 </div>

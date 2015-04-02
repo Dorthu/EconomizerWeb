@@ -35,7 +35,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         $scope.populateVehicles = function() {
             $scope.vehicles = [];
 
-            $http.get('http://localhost:8000/webservices/vehicles/')
+            $http.get('http://localhost:8000/api/v0/vehicles/')
                 .success(function(data, status, headers, config) {
                     console.log(data);
                     $scope.vehicles = data.vehicles;

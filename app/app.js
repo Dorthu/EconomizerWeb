@@ -6,7 +6,8 @@ angular.module('ecnonmizer', [
   'ngRoute',
   'ecnonmizer.login',
   'economizer.gasStop',
-  'mobile-angular-ui'
+  'mobile-angular-ui',
+  'mobile-angular-ui.components'
 ]).
 config(['$routeProvider', function($routeProvider, $cookies) {
   //$routeProvider.otherwise({redirectTo: '/login'});

@@ -1,17 +1,22 @@
 <div ng-controller="LoginCtrl" class="container-fluid scrollable" style="background-color: white;">
-    <span class="error">{{ error }}</span>
-    <form class="simple-form">
-        <div class="form-group">
-            <label>Email:</label>
-            <input class="form-control" type="text" ng-model="user.email" />
-        </div>
-        <div class="form-group">
-            <label>Password:</label>
-            <input class="form-control" type="password" ng-model="user.password" />
-        </div>
-        <div class="form-group">
-            <input class="form-control btn btn-primary" type="submit" value="Login" ng-click="login()"/>
-        </div>
-    </form>
+    <div ui-content-for="title">
+        <span>Login</span>
+    </div>
 
+    <div class="scrollable-content">
+        <span class="error">{{ error }}</span>
+        <form class="simple-form">
+            <div class="form-group">
+                <label>Email:</label>
+                <input class="form-control" type="text" ng-model="user.email" />
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input class="form-control" type="password" ng-model="user.password" />
+            </div>
+            <div class="form-group">
+                <input class="form-control btn btn-primary" type="submit" value="Login" ng-click="login()"/>
+            </div>
+        </form>
+    </div>
 </div>
