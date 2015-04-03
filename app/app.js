@@ -4,11 +4,12 @@
 angular.module('ecnonmizer', [
   'ngCookies',
   'ngRoute',
-  'ecnonmizer.login',
+  'economizer.utils',
+  'economizer.login',
   'economizer.gasStop',
   'mobile-angular-ui',
   'mobile-angular-ui.components'
 ]).
 config(['$routeProvider', function($routeProvider, $cookies) {
-  //$routeProvider.otherwise({redirectTo: '/login'});
+  $routeProvider.otherwise({redirectTo: '/login'});
 }]);

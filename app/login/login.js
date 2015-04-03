@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ecnonmizer.login', ['ngCookies', 'ngRoute'])
+angular.module('economizer.login', ['ngCookies', 'ngRoute', 'economizer.utils'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/login', {
@@ -9,7 +9,7 @@ angular.module('ecnonmizer.login', ['ngCookies', 'ngRoute'])
         });
     }])
 
-    .controller('LoginCtrl', ['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location) {
+    .controller('LoginCtrl', ['$scope', '$http', '$cookies', '$location', 'EndpointService', function($scope, $http, $cookies, $location, EndpointService) {
 
         console.log($cookies['token']);
         if($cookies['token'])
@@ -18,7 +18,7 @@ angular.module('ecnonmizer.login', ['ngCookies', 'ngRoute'])
         $scope.login = function() {
             console.log($scope.user);
 
-            $http.post("http://localhost:8000/webservices/login/", $scope.user, '')
+            $http.post(EndpointService.makeEndpoint('loginService'), $scope.user, '')
                 .success(function(data, status, headers, config) {
                     console.log(data);
 

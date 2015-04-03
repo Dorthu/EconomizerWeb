@@ -9,7 +9,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         });
     }])
 
-    .controller('AddGasStopCtrl', ['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location) {
+    .controller('AddGasStopCtrl', ['$scope', '$http', '$cookies', '$location', 'EndpointService', function($scope, $http, $cookies, $location, EndpointService) {
 
         console.log($cookies['token']);
 
@@ -35,7 +35,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         $scope.populateVehicles = function() {
             $scope.vehicles = [];
 
-            $http.get('http://localhost:8000/api/v0/vehicles/')
+            $http.get(EndpointService.makeEndpoint('vehiclesService'))
                 .success(function(data, status, headers, config) {
                     console.log(data);
                     $scope.vehicles = data.vehicles;
@@ -63,7 +63,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
             data.userLocation = $scope.userLocation;
             console.log(data);
 
-            $http.post('http://localhost:8000/webservices/addGasStop/', data, '')
+            $http.post(EndpointService.makeEndpoint('addGasStopService'), data, '')
                 .success(function(data, status, headers, config) {
                     console.log(data);
 
