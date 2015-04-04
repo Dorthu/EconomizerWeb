@@ -11,5 +11,8 @@ angular.module('ecnonmizer', [
   'mobile-angular-ui.components'
 ]).
 config(['$routeProvider', function($routeProvider, $cookies) {
-  $routeProvider.otherwise({redirectTo: '/login'});
+    $routeProvider.when('/index', {
+      templateUrl: 'home/home.html'
+    });
+    $routeProvider.otherwise({redirectTo: '/index'});
 }]);

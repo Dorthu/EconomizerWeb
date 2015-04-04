@@ -34,3 +34,14 @@
     border-radius: 5px;
     color: white;
 }
+
+.header-text {
+    font-size: large;
+    font-weight: bold;
+    border-bottom: 1px solid grey;
+    width: 100%;
+}
+
+.text-text {
+    margin-bottom: 2em;
+}
