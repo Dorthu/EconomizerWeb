@@ -59,6 +59,24 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
 
         $scope.submit = function() {
 
+            ///validation
+            $scope.gasStop.pricePaid = $scope.gasStop.pricePaid.replace('$', '');
+            if(isNaN(parseFloat($scope.gasStop.pricePaid))) {
+                $scope.error = "Price Paid is not a number!";
+                return;
+            }
+            else if(isNaN(parseFloat($scope.gasStop.gallonsPurchased))) {
+                $scope.error = "Gallons Purchased is not a number!";
+                return;
+            }
+            else if(isNaN(parseInt($scope.gasStop.odometer))) {
+                $scope.error = "Odometer reading is not an integer!";
+                return;
+            }
+            else {
+                $scope.error = undefined;
+            }
+
             var data = $scope.gasStop;
             data.userLocation = $scope.userLocation;
             console.log(data);
