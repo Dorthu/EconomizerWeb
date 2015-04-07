@@ -25,11 +25,37 @@
 
 
     <!-- Sidebars -->
-    <div class="sidebar sidebar-left"><!-- ... --></div>
+    <div class="sidebar sidebar-left">
+
+        <div class="scrollable" ng-controller="SidebarCtrl">
+
+            <div class="scrollable-header" style="font-weight: bolder; font-size: larger; background-color: #ffffff;">
+                Known Issues<br/><hr/>
+            </div>
+
+            <div class="scrollable-content">
+                <div ng-repeat="cur in knownIssues">
+                    <div style="background-color: white;">
+                        <a href="{{ cur.html_url }}" target="_blank">{{ cur.title }}</a><br/>
+                        <hr/>
+                        <p>{{ cur.body }}</p>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
     <div class="sidebar sidebar-right"><!-- ... --></div>
 
     <div class="app">
         <div class="navbar navbar-app navbar-absolute-top">
+            <div class="btn-group pull-left">
+                <div class="btn btn-navbar">
+                    <a href ui-toggle="uiSidebarLeft">Issues</a>
+                </div>
+            </div>
             <div class="navbar-brand navbar-brand-center" ui-yield-to="title">
                 <span>Economizer Pre-Alpha</span>
             </div>
