@@ -11,6 +11,7 @@ angular.module('economizer.utils', [])
                 'loginService': '/login/',
                 'vehiclesService': '/vehicles/',
                 'addGasStopService': '/addGasStop/',
+                'userService': '/user/',
                 'makeEndpoint': function(service) {
                     return this['base']+ this['api_path'] + this[service];
             }

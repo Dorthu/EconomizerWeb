@@ -37,6 +37,12 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
 
             $http.get(EndpointService.makeEndpoint('vehiclesService'))
                 .success(function(data, status, headers, config) {
+                    if(status==401) {
+                        delete $cookies['token'];
+                        $location.path("/login");
+                        return;
+                    }
+
                     console.log(data);
                     $scope.vehicles = data.vehicles;
 
