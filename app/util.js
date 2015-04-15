@@ -12,6 +12,7 @@ angular.module('economizer.utils', [])
                 'vehiclesService': '/vehicles/',
                 'addGasStopService': '/addGasStop/',
                 'userService': '/user/',
+                'resetPasswordService': '/resetPassword/',
                 'makeEndpoint': function(service) {
                     return this['base']+ this['api_path'] + this[service];
             }
@@ -20,7 +21,7 @@ angular.module('economizer.utils', [])
         if(window.location.href.match(/localhost:/))
             endpoints['base'] = 'http://localhost:8000';
         else
-            endpoints['base'] = 'http://economizer.dorthu.com';
+            endpoints['base'] = 'https://economizer.dorthu.com';
 
 
         return endpoints;

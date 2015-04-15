@@ -7,6 +7,7 @@ angular.module('ecnonmizer', [
   'economizer.utils',
   'economizer.login',
   'economizer.gasStop',
+  'economizer.resetPassword',
   'mobile-angular-ui',
   'mobile-angular-ui.components'
 ])
@@ -23,10 +24,13 @@ angular.module('ecnonmizer', [
     if($cookies['token']) {
         $http.defaults.headers.common.Authorization = $cookies['token'];
 
-        $http.post(EndpointService.makeEndpoint('userService'))
+        $http.get(EndpointService.makeEndpoint('userService'))
             .success(function(data, status, headers, config) {
                 if(status==200) {
                     $rootScope.user = data;
+
+                    if($rootScope.user.needsPasswordReset)
+                        $location.path('/resetPassword');
                 }
                 else if(status==401) {
                     delete $cookies['token'];
