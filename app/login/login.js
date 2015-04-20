@@ -24,7 +24,7 @@ angular.module('economizer.login', ['ngCookies', 'ngRoute', 'economizer.utils'])
 
                     if(data['responseType']=='loginResponse') {
                         $cookies['token'] = data['token'];
-                        $location.path('/addGasStop');
+                        location.reload();
                     }
                     else if(data['responseType'] == 'errorResponse') {
                         $scope.error = data['errorMessage'];
