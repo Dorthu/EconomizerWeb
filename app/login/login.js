@@ -9,10 +9,10 @@ angular.module('economizer.login', ['ngCookies', 'ngRoute', 'economizer.utils'])
         });
     }])
 
-    .controller('LoginCtrl', ['$scope', '$http', '$cookies', '$location', 'EndpointService', function($scope, $http, $cookies, $location, EndpointService) {
+    .controller('LoginCtrl', ['$scope', '$http', '$location', 'EndpointService', 'SessionService', function($scope, $http, $location, EndpointService, SessionService) {
 
-        console.log($cookies['token']);
-        if($cookies['token'])
+        console.log(SessionService.get());
+        if(SessionService.get())
             $location.path('/addGasStop');
 
         $scope.login = function() {
@@ -23,7 +23,7 @@ angular.module('economizer.login', ['ngCookies', 'ngRoute', 'economizer.utils'])
                     console.log(data);
 
                     if(data['responseType']=='loginResponse') {
-                        $cookies['token'] = data['token'];
+                        SessionService.set(data['token']);
                         location.reload();
                     }
                     else if(data['responseType'] == 'errorResponse') {

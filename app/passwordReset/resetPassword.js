@@ -9,12 +9,12 @@ angular.module('economizer.resetPassword', ['ngCookies', 'ngRoute'])
         });
     }])
 
-    .controller('ResetPasswordCtrl', ['$scope', '$http', '$cookies', '$location', 'EndpointService', function($scope, $http, $cookies, $location, EndpointService) {
+    .controller('ResetPasswordCtrl', ['$scope', '$http', '$location', 'EndpointService', 'SessionService', function($scope, $http, $location, EndpointService, SessionService) {
 
-        console.log($cookies['token']);
+        console.log(SessionService.get());
 
         ///redirect if not logged in
-        if(!$cookies['token'])
+        if(!SessionService.get())
             $location.path('/login');
 
         $scope.submit = function() {
@@ -26,7 +26,7 @@ angular.module('economizer.resetPassword', ['ngCookies', 'ngRoute'])
 
                     if(status==200) {
                         if(data['responseType']=='loginResponse') {
-                            $cookies['token'] = data['token'];
+                            SessionService.set(data['token']);
                             $location.path('/addGasStop');
                         }
                     }

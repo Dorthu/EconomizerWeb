@@ -9,12 +9,12 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         });
     }])
 
-    .controller('AddGasStopCtrl', ['$scope', '$http', '$cookies', '$location', 'EndpointService', function($scope, $http, $cookies, $location, EndpointService) {
+    .controller('AddGasStopCtrl', ['$scope', '$http', '$location', 'EndpointService', 'SessionService', function($scope, $http, $location, EndpointService, SessionService) {
 
-        console.log($cookies['token']);
+        console.log(SessionService.get());
 
         ///redirect if not logged in
-        if(!$cookies['token'])
+        if(!SessionService.get())
             $location.path('/login');
 
         $scope.userLocation = { 'lat' : 0, 'lon' : 0 };
@@ -29,7 +29,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         }
 
         ///move this to a more general place that only happens once at startup
-        $http.defaults.headers.common.Authorization = $cookies['token'];
+        $http.defaults.headers.common.Authorization = SessionService.get();
 
         $scope.gasStop = {};
         $scope.populateVehicles = function() {
@@ -38,7 +38,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
             $http.get(EndpointService.makeEndpoint('vehiclesService'))
                 .success(function(data, status, headers, config) {
                     if(status==401) {
-                        delete $cookies['token'];
+                        SessionService.clear();
                         $location.path("/login");
                         return;
                     }
@@ -100,7 +100,10 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
                     }
                 })
                 .error(function(data, status, headers, config) {
-                    $scope.error = 'Unable to connect';
+                    if(data.responseType=='errorResponse')
+                        $scope.error = data.errorMessage;
+                    else
+                        $scope.error = 'Unable to connect';
                 });
 
 

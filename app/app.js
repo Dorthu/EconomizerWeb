@@ -19,10 +19,10 @@ angular.module('ecnonmizer', [
     $routeProvider.otherwise({redirectTo: '/index'});
 }])
 
-.run(['$http', '$rootScope', '$location', 'EndpointService', '$cookies', function($http, $rootScope, $location, EndpointService, $cookies) {
+.run(['$http', '$rootScope', '$location', 'EndpointService', 'SessionService', function($http, $rootScope, $location, EndpointService, SessionService) {
     ///intialize the user
-    if($cookies['token']) {
-        $http.defaults.headers.common.Authorization = $cookies['token'];
+    if(SessionService.get()) {
+        $http.defaults.headers.common.Authorization = SessionService.get();
 
         $http.get(EndpointService.makeEndpoint('userService'))
             .success(function(data, status, headers, config) {
@@ -33,12 +33,12 @@ angular.module('ecnonmizer', [
                         $location.path('/resetPassword');
                 }
                 else if(status==401) {
-                    delete $cookies['token'];
+                    SessionService.clear();
                     $location.path('/login');
                 }
             })
             .error(function(data, status, headers, config) {
-                delete $cookies['token'];
+                SessionService.clear();
                 $location.path('/login');
             });
     }

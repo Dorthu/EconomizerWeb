@@ -25,4 +25,33 @@ angular.module('economizer.utils', [])
 
 
         return endpoints;
-});
+    })
+
+    .factory('SessionService', ['$cookies', function($cookies) {
+        return {
+            get: function() {
+                if (typeof(Storage) !== 'undefined') {
+                    return localStorage.getItem('token');
+                }
+                else {
+                    return $cookies['token'];
+                }
+            },
+            set: function(token) {
+                if(typeof(Storage) !== 'undefined') {
+                    localStorage.setItem('token', token);
+                }
+                else {
+                    $cookies['token'] = token;
+                }
+            },
+            clear: function() {
+                if(typeof(Storage) !== 'undefined') {
+                    localStorage.removeItem('token');
+                }
+                else {
+                    delete $cookies['token'];
+                }
+            }
+        };
+    }]);
