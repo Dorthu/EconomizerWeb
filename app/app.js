@@ -4,6 +4,8 @@
 angular.module('ecnonmizer', [
   'ngCookies',
   'ngRoute',
+  'angulartics',
+  'angulartics.google.analytics',
   'economizer.utils',
   'economizer.login',
   'economizer.gasStop',

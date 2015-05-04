@@ -9,7 +9,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         });
     }])
 
-    .controller('AddGasStopCtrl', ['$scope', '$http', '$location', 'EndpointService', 'SessionService', function($scope, $http, $location, EndpointService, SessionService) {
+    .controller('AddGasStopCtrl', ['$scope', '$http', '$location', 'EndpointService', 'SessionService', '$analytics', function($scope, $http, $location, EndpointService, SessionService, $analytics) {
 
         console.log(SessionService.get());
 
@@ -94,6 +94,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
                     if(data['responseType'] == 'gasStopAddedResponse') {
                         alert('Gas Stop added!');
                         $scope.gasStop = {};
+                        $analytics.eventTrack('Gas Stop Added');
                     }
                     else if(data['responseType'] == 'errorResponse') {
                         $scope.error = data['errorMessage'];
