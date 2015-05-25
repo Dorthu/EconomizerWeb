@@ -6,6 +6,7 @@ angular.module('ecnonmizer', [
   'ngRoute',
   'angulartics',
   'angulartics.google.analytics',
+  'googlechart',
   'economizer.utils',
   'economizer.login',
   'economizer.gasStop',

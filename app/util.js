@@ -10,12 +10,15 @@ angular.module('economizer.utils', [])
                 'api_path': '/api/v0',
                 'loginService': '/login/',
                 'vehiclesService': '/vehicles/',
-                'addGasStopService': '/addGasStop/',
+                'gasStopService': '/gasStop/',
                 'userService': '/user/',
                 'resetPasswordService': '/resetPassword/',
                 'makeEndpoint': function(service) {
                     return this['base']+ this['api_path'] + this[service];
-            }
+                },
+                'makeEndpointWithParams' : function(service, params) {
+                    return this.makeEndpoint(service)+"?"+params;   ///TODO: process params in an intelligent manner
+                }
         };
 
         if(window.location.href.match(/localhost:/))

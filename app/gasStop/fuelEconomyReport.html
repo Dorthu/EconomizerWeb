@@ -1,0 +1,21 @@
+<div class="container-fluid scrollable" style="background-color: white;">
+    <div ui-content-for="title">
+        <span>Fuel Economy
+        </span>
+    </div>
+
+    <div class="scrollable-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="error">{{ error }}</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div google-chart chart="graph" style="{{cssStyle}} height: 500px;"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
