@@ -192,7 +192,12 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
                     },
                     "hAxis": {
                         "title": "Odometer"
-                    }
+                    },
+                    "trendlines": { 0: {
+                        'color': 'red',
+                        'lineWidth': 4,
+                        'opacity': '0.3'
+                    } }
                 },
                 "formatters": {}
             }
