@@ -127,7 +127,9 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
             $location.path('/login');
 
         $scope.gasStops = [];
-        var googleLoaded = false;
+        var dataPoints = 10;
+
+        $scope.graphStyle = "height: "+(window.innerHeight-100)+"px";
 
         $scope.makeGraph = function() {
             console.log("Making graph for fuel economy data");
@@ -204,7 +206,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         };
 
         /// get the data
-        $http.get(EndpointService.makeEndpoint('gasStopService'), null, '')
+        $http.get(EndpointService.makeEndpointWithParams('gasStopService', 'count='+dataPoints), null, '')
             .success(function(data, status, headers, config) {
                 if(data['responseType'] == 'gasStopsResponse') {
                     $scope.gasStops = data['values'];
