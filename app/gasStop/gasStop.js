@@ -99,6 +99,7 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
                         alert('Gas Stop added!');
                         $scope.gasStop = {};
                         $analytics.eventTrack('Gas Stop Added', {  category: 'Basic Usage', label: 'Gas Stop Added' });
+                        $location.path("/fuelEconomy");
                     }
                     else if(data['responseType'] == 'errorResponse') {
                         $scope.error = data['errorMessage'];
