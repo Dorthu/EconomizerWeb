@@ -130,80 +130,50 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
         $scope.gasStops = [];
         var dataPoints = 10;
 
-        $scope.graphStyle = "height: "+(window.innerHeight-100)+"px";
+
 
         $scope.makeGraph = function() {
             console.log("Making graph for fuel economy data");
             console.log($scope.gasStops);
 
-            /*var gdat = new google.visualization.DataTable();
-            gdat.addColumn('number', 'MPG');
-            gdat.addColumn('number', 'odometer'); */
-
-            var daters = [];
+            var points = [], labels = [];
 
             $scope.gasStops.forEach(function(d) {
                 if(!isNaN(d.milesPerGallon)) {
-                    daters.push({"c": [{"v": d.odometer}, {"v": d.milesPerGallon}]});
+                    labels.push(d.odometer);
+                    points.push(d.milesPerGallon);
                 }
             });
 
-            /*var options = {
-                chart: {
-                    title: 'Fuel Economy',
-                    subtitle: 'Over your past 10 gas stops'
-                },
-                width: 900,
-                height: 500
+            labels.reverse();
+            points.reverse();
+
+            var data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "Fuel Economy",
+                        fillColor: "rgba(151,187,205,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: points
+                    }
+                ]
             };
+            var opts = {};
 
-            var chart = new google.charts.Line(document.getElementById('graph'));
+            var canvas = document.getElementById("graph");
+            ///size it right
+            canvas.style.width ='100%';
+            canvas.style.height='100%';
+            canvas.width  = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
 
-            chart.draw(gdat, options); */
-
-            ////this makes the graph
-            $scope.graph = {
-                "type": "LineChart",
-                "displayed": true,
-                "data": {
-                    "cols": [
-                        {
-                            "id": "odometer",
-                            "label": "Odometer",
-                            "type": "number",
-                            "p": {}
-                        },
-                        {
-                            "id": "mpg",
-                            "label": "Miles per Gallon",
-                            "type": "number",
-                            "p": {}
-                        }
-                    ],
-                    "rows": daters
-                },
-                "options": {
-                    "title": "Fuel Economy",
-                    "isStacked": "true",
-                    "fill": 20,
-                    "displayExactValues": false,
-                    "vAxis": {
-                        "title": "MGP",
-                        "gridlines": {
-                            "count": 8
-                        }
-                    },
-                    "hAxis": {
-                        "title": "Odometer"
-                    },
-                    "trendlines": { 0: {
-                        'color': 'red',
-                        'lineWidth': 4,
-                        'opacity': '0.3'
-                    } }
-                },
-                "formatters": {}
-            }
+            var c = canvas.getContext("2d");
+            var chart = new Chart(c).Line(data, opts);
         };
 
         /// get the data
