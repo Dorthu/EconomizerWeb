@@ -128,9 +128,11 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
             $location.path('/login');
 
         $scope.gasStops = [];
-        var dataPoints = 10;
+        var dataPoints = Math.floor(window.innerWidth/75);
+        if(dataPoints < 3)
+            dataPoints = 3;
 
-
+        console.log("This many: "+dataPoints);
 
         $scope.makeGraph = function() {
             console.log("Making graph for fuel economy data");
@@ -145,35 +147,24 @@ angular.module('economizer.gasStop', ['ngCookies', 'ngRoute'])
                 }
             });
 
+            labels.push('x');
+            points.push('mpg');
+
             labels.reverse();
             points.reverse();
 
-            var data = {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Fuel Economy",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: points
-                    }
-                ]
-            };
-            var opts = {};
+            var chart = c3.generate({
+                bindto: '#graph',
+                data: {
+                    x: 'x',
+                    columns: [
+                        labels,
+                        points
+                    ],
+                    type: 'spline'
+                }
+            });
 
-            var canvas = document.getElementById("graph");
-            ///size it right
-            canvas.style.width ='100%';
-            canvas.style.height='100%';
-            canvas.width  = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-
-            var c = canvas.getContext("2d");
-            var chart = new Chart(c).Line(data, opts);
         };
 
         /// get the data

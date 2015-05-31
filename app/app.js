@@ -46,12 +46,6 @@ angular.module('ecnonmizer', [
     }
 }])
 
-///configure charts
-.run(function() {
-    Chart.defaults.global.responsive = true;
-    Chart.maintainAspectRatio = true;
-})
-
 .controller('SidebarCtrl', ['$scope', '$http', function($scope, $http) {
     ///setup the known issues in the sidebar
     $scope.knownIssues = [];
