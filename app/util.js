@@ -13,6 +13,7 @@ angular.module('economizer.utils', [])
                 'gasStopService': '/gasStop/',
                 'userService': '/user/',
                 'resetPasswordService': '/resetPassword/',
+                'fuelEconomyReportService': '/fuelEconomyReport/',
                 'makeEndpoint': function(service) {
                     return this['base']+ this['api_path'] + this[service];
                 },

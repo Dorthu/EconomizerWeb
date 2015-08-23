@@ -17,7 +17,23 @@
 
         <div class="row">
             <div class="col-sm-12">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" ng-class="tabClasses[0]"><a ng-click="switchTab(0)">Summary</a></li>
+                    <li role="presentation" ng-class="tabClasses[1]"><a ng-click="switchTab(1)">Detail</a></li>
+                    <li role="presentation" ng-class="tabClasses[2]" style="visibility: hidden;"><a ng-click="switchTab(2)"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12" ng-hide="tabClasses[0]===''">
+                <b>Average Fuel Economy: {{ average_mpg }}</b><br/>
+                <b>Refuel Frequency: {{ stop_frequency }} days</b>
+            </div>
+            <div class="col-sm-12" ng-hide="tabClasses[1]===''">
                 <div id="graph"></div>
+            </div>
+            <div class="col-sm-12" ng-hide="tabClasses[2]===''">
+                IT'S THE FINAL TAB-DOWN (duh nuh nuh nuh~~)
             </div>
         </div>
 
